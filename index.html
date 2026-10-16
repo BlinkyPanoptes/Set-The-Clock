@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set the Clock</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="stage">
+    <img class="background" src="assets/images/background.jpg" alt="" draggable="false">
+
+    <div id="digital" aria-live="polite">
+      <span class="ghost" aria-hidden="true">88:88</span>
+      <span id="digital-time">!4:00</span>
+    </div>
+
+    <img id="hand-hour" class="hand" src="assets/images/hand-hour.png" alt="Hour hand" draggable="false">
+    <img id="hand-minute" class="hand" src="assets/images/hand-minute.png" alt="Minute hand" draggable="false">
+    <img id="hub" src="assets/images/hub.png" alt="" draggable="false">
+
+    <button id="replay-btn" type="button" aria-label="Replay the question"></button>
+
+    <div id="question-banner" class="hidden">
+      <span id="question-text"></span>
+      <span id="progress"></span>
+    </div>
+
+    <div id="feedback" class="hidden">Great job!</div>
+
+    <div id="start-screen" class="overlay">
+      <button id="start-btn" type="button" aria-label="Start the game">
+        <img src="assets/images/start.png" alt="" draggable="false">
+      </button>
+    </div>
+
+    <div id="end-screen" class="overlay hidden">
+      <h1>Great job!</h1>
+      <p>You set all 10 clocks.</p>
+      <button id="play-again-btn" type="button">
+        <img src="assets/images/start.png" alt="" draggable="false">
+        <span>Play again</span>
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

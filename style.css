@@ -1,0 +1,273 @@
+@font-face {
+  font-family: "DSEG7";
+  src: url("assets/fonts/DSEG7Classic-Bold.woff2") format("woff2");
+  font-weight: bold;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ---------- Stage (720 x 540, scaled by script.js) ---------- */
+
+#stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 720px;
+  height: 540px;
+  overflow: hidden;
+  transform-origin: 0 0;
+  touch-action: none;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  width: 720px;
+  height: 540px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------- Clock ---------- */
+
+/* 290x290 images centred on the pivot (359.7, 273.7) */
+.hand {
+  position: absolute;
+  left: 214.7px;
+  top: 128.7px;
+  width: 290px;
+  height: 290px;
+  pointer-events: none;
+}
+
+.hand.snapping {
+  transition: transform 0.15s ease-out;
+}
+
+#hub {
+  position: absolute;
+  left: 334.2px;
+  top: 248.2px;
+  width: 51px;
+  height: 51px;
+  pointer-events: none;
+}
+
+#digital {
+  position: absolute;
+  left: 303px;
+  top: 331px;
+  width: 116px;
+  height: 39px;
+  font-family: "DSEG7", monospace;
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 39px;
+  text-align: center;
+  color: #d40000;
+  text-shadow: 0 0 3px rgba(255, 60, 0, 0.6);
+}
+
+#digital .ghost {
+  position: absolute;
+  inset: 0;
+  color: rgba(160, 50, 0, 0.13);
+  text-shadow: none;
+}
+
+#digital-time {
+  position: relative;
+}
+
+#digital.correct #digital-time {
+  animation: blink 0.3s steps(1) 3;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ---------- Replay (speaker) button ---------- */
+
+#replay-btn {
+  position: absolute;
+  left: 29px;
+  top: 18px;
+  width: 49px;
+  height: 49px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+#replay-btn:hover {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.7);
+}
+
+#replay-btn:active {
+  transform: scale(0.94);
+}
+
+#replay-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+#replay-btn.playing::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  animation: pulse 1s ease-out infinite;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(1.45); opacity: 0; }
+}
+
+/* ---------- Question banner ---------- */
+
+#question-banner {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px 5px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 3px solid #7b3fd6;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+#question-text {
+  font-size: 19px;
+  font-weight: bold;
+  color: #3b1a73;
+}
+
+#progress {
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+  background: #7b3fd6;
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+
+/* ---------- "Great job!" message ---------- */
+
+#feedback {
+  position: absolute;
+  left: 50%;
+  top: 150px;
+  transform: translateX(-50%);
+  padding: 10px 26px;
+  border-radius: 999px;
+  background: #2fa82f;
+  border: 4px solid #fff;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  animation: pop 0.35s ease-out;
+}
+
+@keyframes pop {
+  from { transform: translateX(-50%) scale(0.3); opacity: 0; }
+  to { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+/* ---------- Start / end screens ---------- */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#start-btn,
+#play-again-btn {
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.15s;
+}
+
+#start-btn:hover,
+#play-again-btn:hover {
+  transform: scale(1.05);
+}
+
+#start-btn:focus-visible,
+#play-again-btn:focus-visible {
+  outline: 4px solid #7b3fd6;
+  outline-offset: 4px;
+}
+
+#start-btn img {
+  display: block;
+  width: 300px;
+  height: 300px;
+}
+
+#end-screen h1 {
+  margin: 0;
+  font-size: 54px;
+  color: #3b1a73;
+}
+
+#end-screen p {
+  margin: 6px 0 24px;
+  font-size: 24px;
+  color: #444;
+}
+
+#play-again-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+#play-again-btn img {
+  width: 140px;
+  height: 140px;
+}
